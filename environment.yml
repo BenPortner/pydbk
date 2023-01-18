@@ -1,0 +1,5 @@
+name: pydbk
+channels:
+- conda-forge
+dependencies:
+- python>=3.10
