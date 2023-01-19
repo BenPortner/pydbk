@@ -128,7 +128,10 @@ def extract_files(
     with ZipFile(source, "r") as zf:
         for cid, path in name_path_map.items():
             # remove root anchor to make relative path
-            clean_path = destination / Path("/".join(path.parts[1:]))
+            path = path.relative_to(path.root)
+            if str(path)[0] == "\\":
+                path = Path(str(path)[1:])
+            clean_path = destination / path
             if not dry_run:
                 # make folder
                 clean_path.parent.mkdir(parents=True, exist_ok=True)

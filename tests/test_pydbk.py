@@ -2,8 +2,9 @@ from pathlib import Path
 from pydbk.pydbk_cli import pydbk_cli
 import shutil
 
-source = Path("./test.dbk")
-destination = Path("./tmp/")
+test_dir = Path(__file__).parent.resolve()
+source = test_dir / "test.dbk"
+destination = test_dir / "temp/"
 
 
 def clean_up():
@@ -21,11 +22,11 @@ def test_dry_run():
 
 def test_extraction():
     clean_up()
-    pydbk_cli([str(source), str(destination)])
+    pydbk_cli(["-v", str(source), str(destination)])
     expected_files = [
-        Path("./tmp/Internal Storage/DCIM/OpenCamera/file0.png"),
-        Path("./tmp/Internal Storage/file1.txt"),
-        Path("./tmp/SDcard/file2.txt"),
+        Path(destination / "Internal Storage/DCIM/OpenCamera/file0.png"),
+        Path(destination / "Internal Storage/file1.txt"),
+        Path(destination / "SDcard/file2.txt"),
     ]
     for file in expected_files:
         assert file.exists()
