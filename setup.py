@@ -15,7 +15,8 @@ setup(
         "Development Status :: 4 - Beta",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: Developers"
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
     ],
