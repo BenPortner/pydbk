@@ -5,6 +5,9 @@ import sys
 
 def pydbk_cli(args=None):
 
+    if args is None:
+        args = ["--help"]
+
     parser = argparse.ArgumentParser(
         description="Pydbk: A Python tool to extract .dbk archives."
     )
