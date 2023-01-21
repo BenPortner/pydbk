@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name="pydbk",
-    version="0.1.1",
+    version="0.1.2",
     description="A Python tool to extract .dbk archives.",
     long_description=open('README.md', encoding="utf-8").read(),
     long_description_content_type="text/markdown",
@@ -21,4 +21,9 @@ setup(
         "Operating System :: OS Independent",
     ],
     license="License :: OSI Approved :: GNU Affero General Public License v3",
+    entry_points={
+        'console_scripts': [
+            'pydbk=pydbk.pydbk_cli:pydbk_cli'
+        ]
+    },
 )

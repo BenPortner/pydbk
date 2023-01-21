@@ -24,3 +24,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/BenPortner/pydbk"
 "Bug Tracker" = "https://github.com/BenPortner/pydbk/issues"
+
+[project.scripts]
+pydbk = "pydbk.pydbk_cli:pydbk_cli"
