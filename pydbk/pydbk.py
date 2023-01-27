@@ -120,15 +120,37 @@ class DBKScanner:
     def get_name_path_map(self, key: str = "Content-Id") -> Dict[str, Path]:
         return {f[key]: f["fullpath"] for f in self.files_in_fileindex}
 
+    def get_mod_times(self, key: str = "Content-Id") -> Dict[str, str]:
+        return {f[key]: f["Modified"] for f in self.files_in_fileindex}
+
+    @staticmethod
+    def _set_modification_date(
+        file: Path,
+        modified: datetime | Tuple,
+        accessed: datetime | Tuple = None,
+    ) -> None:
+        if isinstance(modified, tuple):
+            modified = datetime(*modified)
+        if isinstance(accessed, tuple):
+            accessed = datetime(*accessed)
+        elif accessed is None:
+            accessed = datetime.now()
+        os.utime(file, (accessed.timestamp(), modified.timestamp()))
+
     def _extract_file(
         self,
         zf: zipfile.ZipFile,
         source: str,
         destination: Path,
+        keep_date_time: bool = True,
     ) -> None:
         destination.parent.mkdir(parents=True, exist_ok=True)
         with open(destination, "wb") as f:
             f.write(zf.read(source))
+        if keep_date_time is True:
+            self._set_modification_date(
+                file=destination, modified=zf.getinfo(source).date_time
+            )
 
     def extract_files(
         self,
@@ -136,6 +158,7 @@ class DBKScanner:
         check_completeness: bool = True,
         dry_run: bool = False,
         verbose: bool = False,
+        keep_modification_date: bool = True,
     ) -> None:
 
         if check_completeness:
@@ -154,6 +177,7 @@ class DBKScanner:
                         zf=zf,
                         source=self.content_path + cid,
                         destination=clean_path,
+                        keep_date_time=keep_modification_date,
                     )
                 if verbose:
                     print(clean_path)

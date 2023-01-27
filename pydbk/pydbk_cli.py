@@ -45,6 +45,13 @@ class DBKCli:
             action="store_true",
             help="run program without writing files to the destination",
         )
+        parser.add_argument(
+            "-t",
+            "--mod-time",
+            dest="mod_time",
+            action="store_true",
+            help="do not overwrite modification date of extracted files",
+        )
 
         args = parser.parse_args(args)
 
@@ -54,6 +61,7 @@ class DBKCli:
             check_completeness=args.check,
             dry_run=args.dry_run,
             verbose=args.verbose,
+            keep_modification_date=args.mod_time,
         )
 
 
