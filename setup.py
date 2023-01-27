@@ -23,7 +23,7 @@ setup(
     license="License :: OSI Approved :: GNU Affero General Public License v3",
     entry_points={
         'console_scripts': [
-            'pydbk=pydbk.pydbk_cli:pydbk_cli'
+            'pydbk=pydbk.pydbk_cli:cli'
         ]
     },
 )

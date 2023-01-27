@@ -1,5 +1,5 @@
 from pathlib import Path
-from pydbk.pydbk_cli import pydbk_cli
+from pydbk import pydbk_cli
 import shutil
 
 test_dir = Path(__file__).parent.resolve()
@@ -28,6 +28,7 @@ def test_extraction():
         Path(destination / "Internal Storage/file1.txt"),
         Path(destination / "SDcard/file2.txt"),
     ]
+    # check all files extracted
     for file in expected_files:
         assert file.exists()
     clean_up()
