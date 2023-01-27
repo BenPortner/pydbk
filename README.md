@@ -36,19 +36,20 @@ pydbk --help
 ```
 
 ```sh
-usage: pydbk_cli.py [-h] [-v] [-c] [-d] source [destination]
+usage: pydbk [-h] [-v] [-c] [-d] [-t] source [destination]
 
 Pydbk: A Python tool to extract .dbk archives.
 
 positional arguments:
-  source         source file to extract files from (.dbk)
-  destination    destination directory to extract files to
+  source          source file to extract files from (.dbk)
+  destination     destination directory to extract files to
 
 options:
-  -h, --help     show this help message and exit
-  -v, --verbose  verbose mode (print detailed output)
-  -c, --check    check if .dbk archive is complete
-  -d, --dry-run  run program without writing files to the destination
+  -h, --help      show this help message and exit
+  -v, --verbose   verbose mode (print detailed output)
+  -c, --check     check if .dbk archive is complete
+  -d, --dry-run   run program without writing files to the destination
+  -t, --mod-time  do not overwrite modification date of extracted files
 ```
 
 ## What is a .dbk file?
