@@ -7,7 +7,6 @@ from xml.etree import ElementTree
 from typing import List, Dict, Tuple
 import os
 
-source_file = r"C:\Users\Benjamin\Desktop\Handy\Sony Xperia™ Z (C6603)_20160814.dbk"
 
 class DBKScanner:
     source: Path
@@ -157,6 +156,7 @@ class DBKScanner:
                 file=destination, modified=zf.getinfo(source).date_time
             )
 
+
     def extract_files(
         self,
         destination: Path = None,
@@ -168,6 +168,7 @@ class DBKScanner:
 
         if destination is None:
             destination = self.source.with_suffix("")
+
         if check_completeness:
             self._check_all_files_present()
 
@@ -189,8 +190,3 @@ class DBKScanner:
                 if verbose:
                     print(clean_path)
         print(f"Done.")
-
-
-if __name__ == "__main__":
-    dbks = DBKScanner(source_file)
-    dbks.extract_files()
