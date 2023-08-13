@@ -68,5 +68,8 @@ class DBKCli:
         )
 
 
+cli = DBKCli.main
+
+
 if __name__ == "__main__":
-    sys.exit(DBKCli.main())
+    sys.exit(cli())
