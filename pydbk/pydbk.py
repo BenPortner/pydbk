@@ -146,8 +146,13 @@ class DBKScanner:
     ) -> None:
         destination.parent.mkdir(parents=True, exist_ok=True)
         with open(destination, "wb") as f:
-            f.write(zf.read(source))
-        if keep_date_time is True:
+            try:
+                f.write(zf.read(source))
+            except KeyError:
+                warnings.warn(f"File {source} is missing from archive. Skipping.")
+                f.close()
+                destination.unlink()
+        if destination.exists() and keep_date_time is True:
             self._set_modification_date(
                 file=destination, modified=zf.getinfo(source).date_time
             )
