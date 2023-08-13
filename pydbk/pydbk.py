@@ -130,6 +130,9 @@ class DBKScanner:
         accessed: datetime | Tuple = None,
     ) -> None:
         if isinstance(modified, tuple):
+            # zf.getinfo().date_time might be (1980, 0, 0, 0, 0, 8)
+            if 0 in modified[1:3]:
+                return
             modified = datetime(*modified)
         if isinstance(accessed, tuple):
             accessed = datetime(*accessed)
