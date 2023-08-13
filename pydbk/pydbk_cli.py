@@ -32,8 +32,9 @@ class DBKCli:
         parser.add_argument(
             "-c",
             "--check",
-            action="store_true",
-            help="check if .dbk archive is complete",
+            action="store_false",
+            default=True,
+            help="do not check if .dbk archive is complete",
         )
         parser.add_argument(
             "-d",
@@ -44,10 +45,11 @@ class DBKCli:
         )
         parser.add_argument(
             "-t",
-            "--mod-time",
+            "--no-mod-time",
             dest="mod_time",
-            action="store_true",
-            help="do not overwrite modification date of extracted files",
+            action="store_false",
+            default=True,
+            help="do not restore file modification times",
         )
 
         return parser
