@@ -1,4 +1,4 @@
-from pydbk import DBKScanner, default_destination
+from pydbk import DBKScanner
 import argparse
 import sys
 
@@ -20,7 +20,7 @@ class DBKCli:
             "destination",
             type=str,
             nargs="?",
-            default=default_destination,
+            default=None,
             help=f"destination directory to extract files to",
         )
         parser.add_argument(

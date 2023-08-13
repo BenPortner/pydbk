@@ -8,9 +8,6 @@ from typing import List, Dict, Tuple
 import os
 
 source_file = r"C:\Users\Benjamin\Desktop\Handy\Sony Xperia™ Z (C6603)_20160814.dbk"
-code_dir = Path(__file__).parent / "extracted"
-default_destination = Path("./extracted")
-
 
 class DBKScanner:
     source: Path
@@ -162,13 +159,15 @@ class DBKScanner:
 
     def extract_files(
         self,
-        destination: str | Path = default_destination,
+        destination: Path = None,
         check_completeness: bool = True,
         dry_run: bool = False,
         verbose: bool = False,
         keep_modification_date: bool = True,
     ) -> None:
 
+        if destination is None:
+            destination = self.source.with_suffix("")
         if check_completeness:
             self._check_all_files_present()
 
