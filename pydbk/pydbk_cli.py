@@ -8,10 +8,7 @@ class DBKCli:
     scanner: DBKScanner = None
 
     @classmethod
-    def cli(cls, args=None):
-
-        if args is None:
-            args = ["--help"]
+    def parser(cls):
 
         parser = argparse.ArgumentParser(
             description="Pydbk: A Python tool to extract .dbk archives."
@@ -53,7 +50,11 @@ class DBKCli:
             help="do not overwrite modification date of extracted files",
         )
 
-        args = parser.parse_args(args)
+        return parser
+
+    @classmethod
+    def main(cls):
+        args = cls.parser().parse_args()
 
         cls.scanner = DBKScanner(source=args.source)
         cls.scanner.extract_files(
@@ -65,7 +66,5 @@ class DBKCli:
         )
 
 
-cli = DBKCli.cli
-
 if __name__ == "__main__":
-    sys.exit(cli())
+    sys.exit(DBKCli.main())
